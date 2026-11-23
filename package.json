@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "lane — 秘密涂鸦墙博客（lane-theme 模板实例）",
   "type": "module",
-  "license": "PolyForm-Noncommercial-1.0.0",
+  "license": "MIT",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",

@@ -75,4 +75,4 @@ draft: false
 
 ## 许可证
 
-**PolyForm Noncommercial 1.0.0**（源码可得，非开源许可证）：个人 / 非商业免费使用、修改、分发；**商业使用须申请商业授权**，见 [COMMERCIAL-LICENSE.md](COMMERCIAL-LICENSE.md)。© 2026 lane contributors。示例照片来自 Unsplash（Unsplash License）。此前以 MIT 发布的副本不可撤销地继续适用 MIT。
+MIT © 2026 lane contributors。示例照片来自 Unsplash（Unsplash License）。
