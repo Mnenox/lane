@@ -1,0 +1,16 @@
+{
+  "name": "lane-theme",
+  "version": "1.0.0",
+  "description": "lane — 秘密涂鸦墙 Astro 博客模板（默认主题：午夜霓虹巷）",
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^5.0.0"
+  }
+}

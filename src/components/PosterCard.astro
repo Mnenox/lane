@@ -1,0 +1,38 @@
+---
+import { Image } from 'astro:assets';
+import { PALETTE, POSTER_CYCLE } from '../theme/presets';
+import { config, url } from '../theme/config';
+
+const { post, index } = Astro.props;
+const color = POSTER_CYCLE[index % POSTER_CYCLE.length];
+const light = [PALETTE.yellow, PALETTE.green, PALETTE.paper].includes(color);
+const ink = light ? PALETTE.ink : PALETTE.paper;
+const rot = (index % 2 === 0 ? 1 : -1) * (0.6 + (index % 3) * 0.45) * (config.theme.tilt / 1.5);
+const href = url(`/posts/${post.data.slug || post.id}/`);
+const date = post.data.publishAt.toLocaleDateString('zh-CN', {
+  year: 'numeric',
+  month: '2-digit',
+  day: '2-digit'
+});
+---
+<a class="poster" href={href} style={`--pc:${color};--pc-ink:${ink};--rot:${rot.toFixed(2)}deg;--d:${(index % 4) * 110}ms`}>
+  <article class="poster-paper">
+    <h2 class="poster-title">{post.data.title}</h2>
+    <div class="poster-img">
+      {post.data.cover
+        ? <Image
+            src={post.data.cover}
+            alt={post.data.title}
+            widths={[400, 640]}
+            sizes="(max-width: 760px) 90vw, 320px"
+          />
+        : <div class="poster-noimg">lane</div>}
+    </div>
+    <div class="poster-foot">
+      <span class="chip">{post.data.tags[0] || '随笔'}</span>
+      <span class="poster-date">{date}</span>
+      <span class="arrow" aria-hidden="true">→</span>
+    </div>
+  </article>
+  {config.theme.stickers !== false && <span class="sticker" aria-hidden="true">✳</span>}
+</a>

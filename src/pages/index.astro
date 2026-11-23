@@ -1,0 +1,86 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Alley from '../components/Alley.astro';
+import Wall from '../components/Wall.astro';
+import { config, isPublished, url } from '../theme/config';
+
+const posts = (await getCollection('posts'))
+  .filter((p) => isPublished(p))
+  .sort((a, b) => b.data.publishAt - a.data.publishAt);
+
+// 首入过场：多语"你好"霓虹灯箱矩阵（三层景深、40 块满铺），v1.7
+const HELLOS = [
+  ['你好', 7, 8, 1], ['Hello', 26, 6, 0], ['こんにちは', 45, 9, 2], ['안녕하세요', 64, 7, 1], ['Bonjour', 83, 8, 0],
+  ['Hola', 94, 14, 2], ['Ciao', 12, 22, 2], ['Olá', 30, 20, 1], ['Привет', 50, 24, 0], ['مرحبا', 70, 21, 2],
+  ['नमस्ते', 88, 26, 1], ['สวัสดี', 6, 36, 0], ['Xin chào', 22, 34, 2], ['Hej', 40, 38, 1], ['Γεια σου', 58, 35, 0],
+  ['שלום', 76, 38, 2], ['Merhaba', 93, 40, 1], ['Jambo', 14, 50, 1], ['Kia ora', 33, 48, 0], ['Aloha', 52, 52, 2],
+  ['Szia', 71, 49, 1], ['Ahoj', 89, 54, 0], ['Hei', 8, 64, 2], ['Halló', 26, 62, 1], ['Bună', 45, 66, 0],
+  ['Zdravo', 63, 63, 2], ['Tere', 80, 66, 1], ['Moïen', 94, 68, 0], ['Dia duit', 16, 78, 0], ['Shalom', 35, 76, 2],
+  ['Salam', 54, 80, 1], ['Dzień dobry', 73, 77, 0], ['Habari', 90, 82, 2], ['Sannu', 10, 90, 1], ['Bula', 29, 92, 0],
+  ['Talofa', 48, 89, 2], ['Kumusta', 67, 92, 1], ['Vanakkam', 85, 90, 0], ['Ayubowan', 38, 12, 1], ['Sabaidi', 60, 88, 2]
+];
+const LAYERS = [
+  { s: 0.55, bl: '2px', o: 0.45, z: 1, pd: '0.75s' },
+  { s: 0.8, bl: '0.6px', o: 0.7, z: 2, pd: '0.6s' },
+  { s: 1.15, bl: '0px', o: 1, z: 3, pd: '0.45s' }
+];
+const BOX_COLORS = ['#FF2E9A', '#2F6BFF', '#FFD400', '#00C48C', '#FF3B2F'];
+---
+<Base>
+  <div id="enter" class="enter" hidden aria-hidden="true">
+    <div class="enter-boxes">
+      {HELLOS.map((h, i) => {
+        const L = LAYERS[h[3]];
+        return (
+          <span
+            class="enter-box"
+            style={`--x:${h[1]}%;--y:${h[2]}%;--s:${L.s};--bl:${L.bl};--o:${L.o};--z:${L.z};--pd:${L.pd};--d:${(i % 7) * 90}ms;--r:${((i % 5) - 2) * 2}deg;--bc:${BOX_COLORS[i % 5]}`}
+          >{h[0]}</span>
+        );
+      })}
+    </div>
+    <div class="enter-lane">
+      <span class="enter-neon">{config.siteName.toLowerCase()}</span>
+      <span class="enter-tagline">{config.tagline}</span>
+    </div>
+    <span class="enter-skip">点击跳过 · ESC</span>
+  </div>
+  <Alley />
+  <main id="main">
+    <Wall posts={posts} />
+  </main>
+  <footer class="site-foot">
+    © {new Date().getFullYear()} {config.author} · {config.siteName} ·
+    <a href={url('/archive/')}>归档</a>
+  </footer>
+  <script is:inline>
+    (function () {
+      var KEY = 'lane-entered';
+      try {
+        if (sessionStorage.getItem(KEY)) return;
+        sessionStorage.setItem(KEY, '1');
+      } catch (e) { return; }
+      var ok = document.documentElement.dataset.anim !== '0' &&
+        !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!ok) return;
+      var el = document.getElementById('enter');
+      if (!el) return;
+      el.hidden = false;
+      document.documentElement.classList.add('entering');
+      var done = false;
+      var finish = function () {
+        if (done) return;
+        done = true;
+        el.classList.add('go');
+        document.documentElement.classList.remove('entering');
+        setTimeout(function () { el.remove(); }, 2700);
+      };
+      el.addEventListener('click', finish, { once: true });
+      window.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' || e.key === 'Enter' || e.key === ' ') finish();
+      }, { once: true });
+      setTimeout(finish, 1200);
+    })();
+  </script>
+</Base>

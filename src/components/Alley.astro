@@ -1,0 +1,24 @@
+---
+import { config, url } from '../theme/config';
+const { compact = false } = Astro.props;
+---
+<header class:list={['alley', compact && 'alley-compact']}>
+  <span class="alley-tag" aria-hidden="true">lane</span>
+  <nav class="alley-nav" aria-label="主导航">
+    {config.nav.map((n, i) => (
+      <Fragment>
+        {i > 0 && <span class="nav-sep" aria-hidden="true">/</span>}
+        <a href={url(n.href)}>{n.label}</a>
+      </Fragment>
+    ))}
+  </nav>
+  <div class="alley-end">
+    <div class="neon">{config.siteName.toLowerCase()}</div>
+    <p class="alley-tagline">{config.tagline}</p>
+  </div>
+  <span class="drip d1" aria-hidden="true"></span>
+  <span class="drip d2" aria-hidden="true"></span>
+  <span class="splatter s1" aria-hidden="true"></span>
+  <span class="splatter s2" aria-hidden="true"></span>
+  <a class="alley-scroll" href={compact ? '#main' : '#wall'} aria-label="向下进入内容">↓</a>
+</header>

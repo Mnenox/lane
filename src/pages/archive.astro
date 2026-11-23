@@ -1,0 +1,35 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Alley from '../components/Alley.astro';
+import { isPublished, url } from '../theme/config';
+
+const posts = (await getCollection('posts'))
+  .filter((p) => isPublished(p))
+  .sort((a, b) => b.data.publishAt - a.data.publishAt);
+const years = [...new Set(posts.map((p) => p.data.publishAt.getFullYear()))];
+const md = (d) =>
+  `${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+---
+<Base title="归档">
+  <Alley />
+  <main id="main" class="wall">
+    <div class="archive-wrap">
+      {years.map((y) => (
+        <Fragment>
+          <h2 class="archive-year">{y}</h2>
+          {posts
+            .filter((p) => p.data.publishAt.getFullYear() === y)
+            .map((p) => (
+              <a class="archive-row" href={url(`/posts/${p.data.slug || p.id}/`)}>
+                <span class="archive-date">{md(p.data.publishAt)}</span>
+                <span class="archive-title">{p.data.title}</span>
+              </a>
+            ))}
+        </Fragment>
+      ))}
+      {!posts.length && <p class="wall-empty">还没有已上线的文章</p>}
+    </div>
+  </main>
+  <footer class="site-foot">© {new Date().getFullYear()} · lane</footer>
+</Base>

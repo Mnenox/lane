@@ -1,0 +1,19 @@
+<div class="lb" hidden><img alt="" /></div>
+<script>
+  const lb = document.querySelector('.lb');
+  const lbImg = lb.querySelector('img');
+  const close = () => { lb.hidden = true; lbImg.src = ''; };
+  document.addEventListener('click', (e) => {
+    const img = e.target.closest('.prose img');
+    if (img) {
+      lbImg.src = img.currentSrc || img.src;
+      lbImg.alt = img.alt || '';
+      lb.hidden = false;
+    } else if (!lb.hidden) {
+      close();
+    }
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !lb.hidden) close();
+  });
+</script>

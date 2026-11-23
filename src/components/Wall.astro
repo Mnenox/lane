@@ -1,0 +1,30 @@
+---
+import PosterCard from './PosterCard.astro';
+import Graffiti from './Graffiti.astro';
+import { config } from '../theme/config';
+import { DENSITY_COLS } from '../theme/presets';
+const { posts } = Astro.props;
+const cols = Math.min(DENSITY_COLS[config.theme.density] || 4, Math.max(posts.length, 1));
+---
+<section class="wall" id="wall">
+  <Graffiti />
+  <span class="ghost g2" aria-hidden="true">lane</span>
+  <div class="wall-grid" style={`--cols:${cols}`}>
+    {posts.length
+      ? posts.map((p, i) => <PosterCard post={p} index={i} />)
+      : <p class="wall-empty">墙上还没有海报 —— 去客户端写第一篇吧</p>}
+  </div>
+</section>
+<script>
+  // 海报霓虹式进场：进入视口时逐张"通电"闪烁落定（尊重 entranceAnimation 与 reduced-motion）
+  const io = new IntersectionObserver(
+    (entries) => entries.forEach((e) => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    }),
+    { threshold: 0.15 }
+  );
+  document.querySelectorAll('.poster').forEach((p) => io.observe(p));
+</script>

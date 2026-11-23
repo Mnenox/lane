@@ -1,0 +1,26 @@
+---
+import '../styles/global.css';
+import { config, cssVars, url } from '../theme/config';
+const { title, description } = Astro.props;
+const pageTitle = title ? `${title} · ${config.siteName}` : `${config.siteName} · ${config.tagline}`;
+const desc = description || config.tagline;
+---
+<!doctype html>
+<html lang={config.locale} data-anim={config.theme.entranceAnimation === false ? '0' : '1'}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={desc} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={desc} />
+    <meta property="og:type" content="website" />
+    <link rel="icon" type="image/svg+xml" href={url('/favicon.svg')} />
+    <style is:inline set:html={`:root{${cssVars}`}></style>
+    <script is:inline>document.documentElement.classList.add('js');</script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">跳到内容</a>
+    <slot />
+  </body>
+</html>

@@ -1,0 +1,46 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Alley from '../../components/Alley.astro';
+import Lightbox from '../../components/Lightbox.astro';
+import { config, isPublished, url } from '../../theme/config';
+
+export async function getStaticPaths() {
+  const all = await getCollection('posts');
+  // dev 预览包含草稿 / 定时未到期文章（客户端所见即所得）；生产构建仍过滤
+  const posts = import.meta.env.DEV ? all : all.filter((p) => isPublished(p));
+  return posts.map((p) => ({
+    params: { slug: p.data.slug || p.id },
+    props: { post: p }
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const date = post.data.publishAt.toLocaleDateString('zh-CN', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+});
+---
+<Base title={post.data.title} description={post.data.summary}>
+  <Alley compact />
+  <main id="main" class="wall read-wall">
+    <div class="read-top"><a href={url('/')}>← 回到墙面</a></div>
+    <article class="read-sheet">
+      <div class="prose">
+        <h1>{post.data.title}</h1>
+        <div class="post-meta">
+          <span>{date}</span>
+          {post.data.tags.map((t) => <span class="chip">{t}</span>)}
+        </div>
+        <Content />
+      </div>
+    </article>
+  </main>
+  <footer class="site-foot">
+    © {new Date().getFullYear()} {config.author} · {config.siteName} ·
+    <a href={url('/archive/')}>归档</a>
+  </footer>
+  <Lightbox />
+</Base>
