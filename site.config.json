@@ -1,0 +1,38 @@
+{
+  "siteName": "lane",
+  "tagline": "穿过小巷，撞见一面秘密的涂鸦墙",
+  "author": "lane",
+  "siteUrl": "https://example.github.io",
+  "basePath": "/lane",
+  "locale": "zh-CN",
+  "nav": [
+    {
+      "label": "首页",
+      "href": "/"
+    },
+    {
+      "label": "归档",
+      "href": "/archive/"
+    },
+    {
+      "label": "关于",
+      "href": "/about/"
+    }
+  ],
+  "social": [
+    {
+      "label": "GitHub",
+      "href": "https://github.com/"
+    }
+  ],
+  "about": "lane 是一面秘密的涂鸦墙。\n\n这里记录生活随笔与图文：雨夜的便利店、巷子里的猫、海边的明信片。浏览时热闹，阅读时安静。\n\n本站由 lane 模板构建，全部内容与设置均为开放格式，欢迎克隆复用。",
+  "theme": {
+    "wall": "midnight",
+    "radius": 10,
+    "tilt": 2,
+    "density": "mid",
+    "stickers": true,
+    "entranceAnimation": true,
+    "fontPair": "default"
+  }
+}
