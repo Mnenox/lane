@@ -1,9 +1,7 @@
-import fs from 'node:fs';
+import raw from '../../site.config.json';
 import { cssVars as buildVars } from './presets';
 
-const raw = JSON.parse(
-  fs.readFileSync(new URL('../../site.config.json', import.meta.url), 'utf8')
-);
+// JSON 经 vite import 追踪：配置改动触发 dev 热更新（v1.25 修复预览不刷新）
 
 const DEFAULT_THEME = {
   wall: 'midnight',

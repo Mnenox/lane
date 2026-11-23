@@ -25,11 +25,11 @@
       "href": "https://github.com/"
     }
   ],
-  "about": "欢迎来到 lane ！\n\n如果你喜欢霓虹风格，请不要错过它。\n\nlane 拥有配套的桌面端程序，可以轻松编辑博客内容，在GitHub搜索 lane-client 以获取。\n\n本站由 lane 模板构建，全部内容与设置均为开放格式，欢迎克隆复用。",
+  "about": "如果你爱好霓虹风格，请不要错过 lane ！\n\n本站基于 lane 模板制作，欢迎复刻\n\n除了独特的外观效果， lane 还有一个配套的桌面端程序用于便携编辑博客内容，在GitHub中搜索 lane-client 以获取。\n\n",
   "theme": {
     "wall": "midnight",
-    "radius": 14,
-    "tilt": 0,
+    "radius": 8,
+    "tilt": 3,
     "density": "mid",
     "stickers": false,
     "entranceAnimation": true,

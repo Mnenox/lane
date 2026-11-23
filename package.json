@@ -1,9 +1,9 @@
 {
-  "name": "lane-theme",
+  "name": "lane",
   "version": "1.0.0",
-  "description": "lane — 秘密涂鸦墙 Astro 博客模板（默认主题：午夜霓虹巷）",
+  "description": "lane — 秘密涂鸦墙博客（lane-theme 模板实例）",
   "type": "module",
-  "license": "MIT",
+  "license": "PolyForm-Noncommercial-1.0.0",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
