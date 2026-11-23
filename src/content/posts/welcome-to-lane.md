@@ -1,15 +1,13 @@
 ---
-title: Welcome to lane
-summary: Past the noisy street and the neon signs, a secret corner that can keep every kind of story.
-tags: [welcome, lane]
-cover: ../../assets/rainy-convenience-store.jpg
-publishAt: 2025-06-01T10:00:00+08:00
-draft: true
+title: "Welcome to lane"
+summary: "Past the noisy street and the neon signs, a secret corner that can keep every kind of story."
+tags: ["welcome", "lane"]
+cover: ../../assets/bingwallpaper1.webp
+publishAt: 2026-11-20T10:00:00+08:00
+draft: false
 ---
 
 Through a noisy street, past a stretch of neon signs, you arrive at this secret corner that can keep every kind of story. Post the things you love here, in this little alley!
-
-![The alley at night, neon stretching across wet asphalt](../../assets/rainy-convenience-store.jpg)
 
 ## What's in lane
 
