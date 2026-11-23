@@ -1,6 +1,6 @@
 {
   "siteName": "lane",
-  "tagline": "为霓虹灯的绚烂留下多彩的文字",
+  "tagline": "用文字记录绚烂",
   "author": "lane",
   "siteUrl": "https://mnenox.github.io",
   "basePath": "/lane",
@@ -25,14 +25,14 @@
       "href": "https://github.com/"
     }
   ],
-  "about": "lane 是一面秘密的涂鸦墙。\n\n这里记录生活随笔与图文：雨夜的便利店、巷子里的猫、海边的明信片。浏览时热闹，阅读时安静。\n\n本站由 lane 模板构建，全部内容与设置均为开放格式，欢迎克隆复用。",
+  "about": "欢迎来到 lane ！\n\n如果你喜欢霓虹风格，请不要错过它。\n\nlane 拥有配套的桌面端程序，可以轻松编辑博客内容，在GitHub搜索 lane-client 以获取。\n\n本站由 lane 模板构建，全部内容与设置均为开放格式，欢迎克隆复用。",
   "theme": {
     "wall": "midnight",
-    "radius": 10,
-    "tilt": 2,
+    "radius": 14,
+    "tilt": 0,
     "density": "mid",
-    "stickers": true,
+    "stickers": false,
     "entranceAnimation": true,
-    "fontPair": "default"
+    "fontPair": "sans"
   }
 }
