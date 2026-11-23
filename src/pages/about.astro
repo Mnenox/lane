@@ -10,14 +10,14 @@ const LINK_CYCLE = [PALETTE.yellow, PALETTE.blue, PALETTE.green, PALETTE.red];
 <Base title="关于">
   <Alley compact />
   <main id="main" class="wall read-wall">
-    <div class="read-top"><a class="back-board" href={url('/')}>← 回到墙面</a></div>
+    <div class="read-top"><a class="back-board" href={url('/')} data-i18n="back">← Back to the wall</a></div>
     <section class="boards">
       <Graffiti />
       <article class="board board-main" style={`--bc:${PALETTE.magenta};--d:0ms`}>
         <svg class="board-doodle" viewBox="0 0 60 100" aria-hidden="true">
           <path d="M14 92 L34 56 L24 52 L46 14 M46 14 l-16 5 M46 14 l-3 16" />
         </svg>
-        <h1 class="board-title">关于 {config.siteName}</h1>
+        <h1 class="board-title" data-i18n="aboutTitle">About lane</h1>
         {paragraphs.map((p) => <p class="board-line">{p}</p>)}
       </article>
       {config.social.length > 0 && (

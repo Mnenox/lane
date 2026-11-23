@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import { config, cssVars, url } from '../theme/config';
+import { STRINGS, applyI18n } from '../theme/i18n';
 const { title, description } = Astro.props;
 const pageTitle = title ? `${title} · ${config.siteName}` : `${config.siteName} · ${config.tagline}`;
 const desc = description || config.tagline;
@@ -20,7 +21,8 @@ const desc = description || config.tagline;
     <script is:inline>document.documentElement.classList.add('js');</script>
   </head>
   <body>
-    <a class="skip-link" href="#main">跳到内容</a>
+    <a class="skip-link" href="#main" data-i18n="skipLink">Skip to content</a>
     <slot />
+    <script is:inline set:html={`(${applyI18n.toString()})(${JSON.stringify(STRINGS)}, ${JSON.stringify(config.lang || 'auto')});`}></script>
   </body>
 </html>

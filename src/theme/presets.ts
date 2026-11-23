@@ -36,6 +36,18 @@ export const FONT_PAIRS = {
       '"Archivo Black","Source Han Sans SC","Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif',
     body:
       '"Inter","Source Han Serif SC","Noto Serif SC","Songti SC","SimSun",serif'
+  },
+  sans: {
+    display:
+      '"Archivo Black","Source Han Sans SC","Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif',
+    body:
+      '"Inter","Source Han Sans SC","Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif'
+  },
+  serif: {
+    display:
+      '"Source Han Serif SC","Noto Serif SC","Songti SC","SimSun",serif',
+    body:
+      '"Source Han Serif SC","Noto Serif SC","Songti SC","SimSun",serif'
   }
 };
 
@@ -44,7 +56,9 @@ export function cssVars(theme = {}) {
   const radius = clamp(theme.radius ?? 10, 6, 14);
   const tilt = clamp(theme.tilt ?? 1.5, 0, 3);
   const cols = DENSITY_COLS[theme.density] || DENSITY_COLS.mid;
-  const fonts = FONT_PAIRS[theme.fontPair] || FONT_PAIRS.default;
+  const fonts = { ...(FONT_PAIRS[theme.fontPair] || FONT_PAIRS.default) };
+  if (theme.fontDisplay) fonts.display = String(theme.fontDisplay);
+  if (theme.fontBody) fonts.body = String(theme.fontBody);
   return [
     `--wall:${wall.wall}`,
     `--seam:${wall.seam}`,

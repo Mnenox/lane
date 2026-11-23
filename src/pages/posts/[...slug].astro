@@ -26,7 +26,7 @@ const date = post.data.publishAt.toLocaleDateString('zh-CN', {
 <Base title={post.data.title} description={post.data.summary}>
   <Alley compact />
   <main id="main" class="wall read-wall">
-    <div class="read-top"><a href={url('/')}>← 回到墙面</a></div>
+    <div class="read-top"><a href={url('/')} data-i18n="back">← Back to the wall</a></div>
     <article class="read-sheet">
       <div class="prose">
         <h1>{post.data.title}</h1>

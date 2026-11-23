@@ -12,7 +12,7 @@ const cols = Math.min(DENSITY_COLS[config.theme.density] || 4, Math.max(posts.le
   <div class="wall-grid" style={`--cols:${cols}`}>
     {posts.length
       ? posts.map((p, i) => <PosterCard post={p} index={i} />)
-      : <p class="wall-empty">墙上还没有海报 —— 去客户端写第一篇吧</p>}
+      : <p class="wall-empty" data-i18n="empty">No posters on the wall yet — write your first in the lane client.</p>}
   </div>
 </section>
 <script>
