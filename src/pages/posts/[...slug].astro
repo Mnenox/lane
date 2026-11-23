@@ -17,7 +17,7 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await render(post);
-const date = post.data.publishAt.toLocaleDateString('zh-CN', {
+const date = post.data.publishAt.toLocaleDateString(config.locale || 'en', {
   year: 'numeric',
   month: 'long',
   day: 'numeric'

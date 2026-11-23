@@ -18,7 +18,7 @@ const light = [PALETTE.yellow, PALETTE.green, PALETTE.paper].includes(color);
 const ink = light ? PALETTE.ink : PALETTE.paper;
 const rot = (index % 2 === 0 ? 1 : -1) * (0.6 + (index % 3) * 0.45) * (config.theme.tilt / 1.5);
 const href = url(`/posts/${post.data.slug || post.id}/`);
-const date = post.data.publishAt.toLocaleDateString('zh-CN', {
+const date = post.data.publishAt.toLocaleDateString(config.locale || 'en', {
   year: 'numeric',
   month: '2-digit',
   day: '2-digit'
