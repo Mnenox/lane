@@ -3,6 +3,15 @@ import { Image } from 'astro:assets';
 import { PALETTE, POSTER_CYCLE } from '../theme/presets';
 import { config, url } from '../theme/config';
 
+// 封面容错解析：素材缺失时降级为无图海报，不致构建失败（v1.15）
+const coverFiles = import.meta.glob('../assets/*.{jpg,jpeg,png,webp}', { eager: true });
+function coverMeta(cover) {
+  if (!cover) return null;
+  const base = String(cover).split('/').pop();
+  const key = Object.keys(coverFiles).find((k) => k.endsWith('/' + base));
+  return key ? coverFiles[key].default : null;
+}
+
 const { post, index } = Astro.props;
 const color = POSTER_CYCLE[index % POSTER_CYCLE.length];
 const light = [PALETTE.yellow, PALETTE.green, PALETTE.paper].includes(color);
@@ -14,14 +23,15 @@ const date = post.data.publishAt.toLocaleDateString('zh-CN', {
   month: '2-digit',
   day: '2-digit'
 });
+const meta = coverMeta(post.data.cover);
 ---
 <a class="poster" href={href} style={`--pc:${color};--pc-ink:${ink};--rot:${rot.toFixed(2)}deg;--d:${(index % 4) * 110}ms`}>
   <article class="poster-paper">
     <h2 class="poster-title">{post.data.title}</h2>
     <div class="poster-img">
-      {post.data.cover
+      {meta
         ? <Image
-            src={post.data.cover}
+            src={meta}
             alt={post.data.title}
             widths={[400, 640]}
             sizes="(max-width: 760px) 90vw, 320px"
